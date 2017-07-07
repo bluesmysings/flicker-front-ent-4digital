@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flickr</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Kurale" rel="stylesheet">
+
+		<style type="text/css">
+			body {
+				font-family: 'Kurale', serif;
+			}
+
+			.col-md-4 {
+				min-height: 250px;
+			}
+		</style>
+	</head>
+
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1>Flickr</h1>
+				<div id="flickr"></div>
+			</div>
+		</div>
+	</div>
+
+	
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script type="text/javascript">
+		function flickr(user){
+			$.getJSON('http://api.flickr.com/services/feeds/photos_public.gne?id='+user+'&format=json&jsoncallback=?', function(data){
+				for(i=0; i<6; i++){
+					$("<img class='img-responsive center-block' />").attr("src", data.items[i].media.m).appendTo("#flickr").wrap("<div class='col-md-4'><a href='" + data.items[i].link + "' title='" + data.items[i].title + "' target='_blank'><\/a><\/div>");
+				}
+			});
+		}
+
+		$(document).ready(function(){
+			flickr('150021370@N05');
+		});
+	</script>
+
+</body>
+</html>
+
+
+	
